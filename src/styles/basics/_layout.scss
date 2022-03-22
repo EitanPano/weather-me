@@ -1,0 +1,21 @@
+.main-layout {
+    grid-template-columns: $layoutPadding 1fr $layoutPadding;
+
+    > * {
+        grid-column: 2;
+    }
+
+    > *.full {
+        grid-column: 1 / -1;
+    }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax(12em, 1fr));
+    padding: 0 0.5em;
+    gap: 1.5em;
+    grid-auto-flow: dense;
+}
+
+

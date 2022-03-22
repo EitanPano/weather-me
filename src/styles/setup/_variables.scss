@@ -1,0 +1,23 @@
+// COLOR PALETTE
+$text: #3f3f3f;
+
+$clr1: rgb(255, 232, 248);
+$clr2: #ccc;
+$clr3: #87e4f5;
+$clr4: #f0decb;
+$clr5: #fff;
+
+// CONSTANT FIXED CMPS SIZE
+$appHeader: 4em;
+
+// LAYOUT
+$layoutPadding: 20px;
+
+// LAYOUT BREAKPOINTS
+$break-narrow: 512px;
+$break-normal: 768px;
+$break-wide: 1024px;
+
+$padded-break-narrow: $break-narrow + $layoutPadding * 2;
+$padded-break-normal: $break-normal + $layoutPadding * 2;
+$padded-break-wide: $break-wide + $layoutPadding * 2;

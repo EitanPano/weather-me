@@ -1,0 +1,29 @@
+// SETUP
+@import "setup/variables";
+@import "setup/mixins";
+@import "setup/functions";
+@import "setup/typography";
+
+// BASICS
+@import "basics/sanitize";
+@import "basics/helpers";
+@import "basics/base";
+@import "basics/layout";
+
+
+
+// COMPONENTS
+// @import "cmps/blur-screen";
+@import "cmps/app-header";
+@import "cmps/burger-menu";
+
+//Views
+@import "views/home";
+@import "views/about";
+
+
+// TESTS
+.app-logo {
+    width: 15em;
+    height: 15em;
+}
