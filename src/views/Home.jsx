@@ -1,42 +1,46 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadDefaultLocation } from '../store/actions/locationActions';
+// import { useParams } from 'react-router-dom';
+import { setLocation } from '../store/actions/locationActions';
+import { accuWeatherAPI } from '../services/externalAPIService';
 
+import { LocationDetails } from './LocationDetails';
+
+import { SearchBar } from '../cmps/SearchBar';
 import { Loading } from '../cmps/Loading';
-import { useForm } from '../hooks/useForm';
+
 
 export const Home = () => {
     const dispatch = useDispatch();
-    const [searchTerm, handleChange] = useForm({term: ''}, getAutoComplete)
-    const { defaultLocation } = useSelector((state) => state.locationModule);
-
+    const { selectedLocation,  } = useSelector((state) => state.locationModule);
+    const [suggestions, setSuggestions] = useState(null);
+    
     useEffect(async () => {
-        dispatch(loadDefaultLocation());
+        // console.log('locationId: ', locationId);
+        dispatch(setLocation());
     }, []);
 
-    function getAutoComplete() {
-        console.log(searchTerm);
+    async function onChangeSearch(term) {
+        const newSuggestions = await accuWeatherAPI.getSuggestions(term);
+        setSuggestions(newSuggestions);
     }
 
+    function onSetLocation(locationId) {
+        // dispatch(addLocation(location))
+        dispatch(setLocation(locationId))
+    }
 
-
-    const { term } = searchTerm
-    if (!defaultLocation) return <Loading></Loading>;
+    if (!selectedLocation) return <Loading></Loading>;
     return (
         <div>
             <h1>Home-Page</h1>
-            <form action="">
-                <label htmlFor="term"></label>
-                <input
-                    value={term}
-                    onChange={handleChange}
-                    id="term"
-                    name="term"
-                    type="search"
-                    placeholder="Search"
-                />
-            </form>
-            <h2>{JSON.stringify(defaultLocation)}</h2>
+            <SearchBar
+                onSetLocation={onSetLocation}
+                onChangeSearch={onChangeSearch}
+                suggestions={suggestions}
+            ></SearchBar>
+            <LocationDetails></LocationDetails>
+            <h2>{JSON.stringify(selectedLocation)}</h2>
         </div>
     );
 };

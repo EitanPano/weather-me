@@ -2,6 +2,7 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import './styles/style.scss';
 import { Home } from './views/Home';
 import { Favorite} from './views/Favorite'
+import { LocationDetails } from './views/LocationDetails';
 import { AppHeader } from './cmps/AppHeader';
 
 export function App() {
@@ -15,7 +16,6 @@ export function App() {
 					<Route path="*" element={<Navigate to="/" />}/>
                 </Routes>
             </div>
-            ;
         </Router>
     );
 }

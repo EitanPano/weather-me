@@ -5,7 +5,6 @@ export const useForm = (initialState, cbFunc = () => {}) => {
     const [fields, setFields] = useState(initialState);
 
     useDidUpdate(() => {
-        console.log(fields);
         cbFunc(fields);
     }, [fields]);
 

@@ -1,5 +1,4 @@
 // Local Asynchronous Storage Service Overcoded
-
 export const lasso = {
     query,
     get,
@@ -9,8 +8,8 @@ export const lasso = {
     postMany,
 };
 
-async function query(entityType, delay = 500) {
-    var entities = JSON.parse(localStorage.getItem(entityType)) || [];
+async function query(entityType, pointerType = [], delay = 500) {
+    var entities = JSON.parse(localStorage.getItem(entityType)) || pointerType;
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(entities);
@@ -38,6 +37,7 @@ async function put(entityType, updatedEntity) {
         const idx = entities.findIndex(
             (entity) => entity._id === updatedEntity._id
         );
+        console.log('IDX From Lasso: ', idx);
         entities.splice(idx, 1, updatedEntity);
         _save(entityType, entities);
         return updatedEntity;
@@ -53,12 +53,31 @@ async function remove(entityType, entityId) {
     });
 }
 
-async function postMany(entityType, newEntities) {
-    return query(entityType).then((entities) => {
-        entities.push(...newEntities);
+async function postMany(entityType, newEntities, varType = []) {
+    return query(entityType, varType).then((entities) => {
+        console.log(entities);
+        if (Array.isArray(entities)) {
+            entities.push(...newEntities);
+        } else {
+            entities = { ...entities, ...newEntities };
+        }
         _save(entityType, entities);
         return entities;
     });
+}
+
+function _save(entityType, entities) {
+    localStorage.setItem(entityType, JSON.stringify(entities));
+}
+
+function _makeId(length = 5) {
+    var text = '';
+    var possible =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
 }
 
 export const ls = {
@@ -80,17 +99,3 @@ export const ss = {
         return JSON.parse(sessionStorage.getItem(key));
     },
 };
-
-function _save(entityType, entities) {
-    localStorage.setItem(entityType, JSON.stringify(entities));
-}
-
-function _makeId(length = 5) {
-    var text = '';
-    var possible =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-}

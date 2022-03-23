@@ -1,5 +1,5 @@
 import { locationService } from '../../services/locationService';
-import { accuWeatherAPI } from '../../services/externalAPIService'
+import { accuWeatherAPI } from '../../services/externalAPIService';
 
 export function loadLocations() {
     return async (dispatch, getState) => {
@@ -13,18 +13,28 @@ export function loadLocations() {
     };
 }
 
-export function loadDefaultLocation() {
-    return async (dispatch, getState) => {
-        try {
-            // const updatedLocation = await locationService.getDefault()
-            const updatedLocation = await accuWeatherAPI.getLocation()
-            console.log(updatedLocation);
-            dispatch({type: 'LOAD_DEFAULT_LOCATION', location: updatedLocation})
+export function loadSuggestions() {
+    return async (dispatch) => {};
+}
 
-        } catch(err) {
-            console.log('err: ', err)
+export function setLocation(locationId) {
+    return async (dispatch) => {
+        if (!locationId) return;
+        console.log('locationId: ', locationId);
+        const location = await locationService.getById(locationId);
+        console.log('location: ', location);
+        if (!location) {
+            console.log('No Location Found.');
+            try {
+                const newLocation = await accuWeatherAPI.getLocation(locationId);
+                console.log('newLocation: ', newLocation);
+                locationService.save(newLocation)
+                dispatch({type: 'SET_LOCATION', newLocation})
+            } catch (err) {
+                console.log(err);
+            }
         }
-    }
+    };
 }
 
 export function getLocationById(locationId) {
@@ -36,9 +46,10 @@ export function getLocationById(locationId) {
 export function saveLocation(location) {
     return async (dispatch) => {
         try {
-            const newLocation = await locationService.save({...location});
-            if (location._id) dispatch({ type: 'UPDATE_LOCATION', location: newLocation })
-            else dispatch({ type: 'ADD_LOCATION', location: newLocation })
+            const newLocation = await locationService.save({ ...location });
+            if (location._id)
+                dispatch({ type: 'UPDATE_LOCATION', location: newLocation });
+            else dispatch({ type: 'ADD_LOCATION', location: newLocation });
         } catch (err) {
             console.log(err);
         }

@@ -66,7 +66,7 @@ async function query(filterBy = null) {
 
 export async function getById(id) {
     const location = await lasso.get(ITEM_KEY ,id)
-    return Promise.resolve({ ...location });
+    return location ? { ...location } : null;
 }
 
 function save(location) {

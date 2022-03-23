@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    defaultLocation: {_id: 'f101', city: 'Tel-Aviv', temperature: 29 },
+    selectedLocation: {_id: 'f101', city: 'Tel-Aviv', temperature: 29, isFavorite: true },
     locations: [],
     filterBy: null,
 };
@@ -14,10 +14,10 @@ export const locationReducer = (state = INITIAL_STATE, action) => {
                 locations: [...action.locations]
             };
 
-        case 'LOAD_DEFAULT_LOCATION':
+        case 'SET_LOCATION':
             return {
                 ...state,
-                defaultLocation: {...action.location}
+                selectedLocation: {...action.location}
             }
 
         case 'ADD_LOCATION':
