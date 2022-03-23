@@ -5,28 +5,11 @@ export const locationService = {
     getById,
     save,
     remove,
-    getEmptyLocation,
 };
 
-const ITEM_KEY = 'locations';
+const LOCATION_KEY = 'locations';
 
-const defaultLocations = [
-    {
-        _id: 'f101',
-        name: 'Gold Sword', 
-        temperature: 25,
-    },
-    {
-        _id: 'f102',
-        name: 'Iron Chestplate',
-        price: 10,
-    },
-    {
-        _id: 'f103',
-        name: 'Ruby Amulet',
-        price: 35,
-    },
-];
+const defaultLocations = [];
 
 function sort(arr) {
     return arr.sort((a, b) => {
@@ -56,8 +39,8 @@ function _filter(filterBy, locations) {
 }
 
 async function query(filterBy = null) {
-    let locations = await lasso.query(ITEM_KEY);
-    if (!locations.length) locations = _loadLocations()
+    let locations = await lasso.query(LOCATION_KEY);
+    if (!locations.length) locations = _loadLocations();
     if (filterBy) {
         locations = _filter(filterBy, locations);
     }
@@ -65,39 +48,33 @@ async function query(filterBy = null) {
 }
 
 export async function getById(id) {
-    const location = await lasso.get(ITEM_KEY ,id)
+    const location = await lasso.get(LOCATION_KEY, id);
     return location ? { ...location } : null;
 }
 
 function save(location) {
-    return (location._id) ? _updateLocation(location) : _addLocation(location);
+    return location._id ? _updateLocation(location) : _addLocation(location);
 }
 
 async function _addLocation(location) {
-    const newLocation = await lasso.post(ITEM_KEY, location);
-    return newLocation;
+    const newLocation = await lasso.post(LOCATION_KEY, location);
+    return {...newLocation};
 }
 
 async function _updateLocation(location) {
-    const newLocation = await lasso.put(ITEM_KEY, location)
-    return newLocation;
+    const newLocation = await lasso.put(LOCATION_KEY, location);
+    return {...newLocation};
 }
 
 function remove(id) {
-    lasso.remove(ITEM_KEY, id);
-}
-
-export function getEmptyLocation() {
-    return {
-        name: '',
-        price: 99,
-        type: '',
-    };
+    lasso.remove(LOCATION_KEY, id);
 }
 
 function _loadLocations() {
-    let locations = JSON.parse(localStorage.getLocation(ITEM_KEY));
+    let locations = JSON.parse(localStorage.getLocation(LOCATION_KEY));
     if (!locations || !locations.length) locations = defaultLocations;
-    localStorage.setLocation(ITEM_KEY, JSON.stringify(locations));
+    localStorage.setLocation(LOCATION_KEY, JSON.stringify(locations));
     return locations;
 }
+
+

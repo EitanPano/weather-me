@@ -1,23 +1,27 @@
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
-export function ItemPreview({ item, onRemoveItem }) {
-    const navigate = useNavigate();
 
-    const onDetails = (itemId) => navigate(`/item/details/${itemId}`);
-    const onEdit = (itemId) => navigate(`/item/edit/${itemId}`);
+export function ItemPreview({ item }) {
+    const {isMetric} = useSelector((state) => state.locationModule)
 
+    const days = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', ];
+    const getDayName = (dateString) => {
+        const date = new Date(dateString);
+        return days[date.getDay()];
+    };
+      
+    if (!item) return null;
+
+    const { atDay, atNight, temperature, date } = item;
+    const { maximum, minimum } = temperature;
     return (
-        <li onClick={() => onDetails(item._id)}>
-            <img src="" alt="" />
-            <div>
-                <p>Name: {item.name}</p>
-                <p>Price: {item.price}</p>
-                <p>Type: {item.type}</p>
-            </div>
-            <div className="actions" onClick={(ev) => ev.stopPropagation()}>
-                <button onClick={() => onEdit(item._id)}>Edit</button>
-                <button onClick={() => onRemoveItem(item._id)}>❌</button>
-            </div>
+        <li>
+            <p>{getDayName(date)}</p>
+
+            <p>Day : {isMetric ? maximum.celsius : maximum.fahrenheit}°</p>
+            <p>{atDay}</p>
+            <p>Night : {isMetric ? minimum.celsius : minimum.fahrenheit}°</p>
+            <p>{atNight}</p>
         </li>
     );
 }

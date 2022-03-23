@@ -1,43 +1,49 @@
 const INITIAL_STATE = {
-    selectedLocation: {_id: 'f101', city: 'Tel-Aviv', temperature: 29, isFavorite: true },
-    locations: [],
+    defaultLocation: null,
+    selectedLocation: null,
+    likedLocations: [],
     filterBy: null,
+    isMetric: true,
 };
 
 export const locationReducer = (state = INITIAL_STATE, action) => {
     console.log('action', action);
     switch (action.type) {
-
-        case 'LOAD_LOCATIONS':
-            return {
-                ...state,
-                locations: [...action.locations]
-            };
-
         case 'SET_LOCATION':
             return {
                 ...state,
                 selectedLocation: {...action.location}
             }
 
+        case 'LOAD_LOCATIONS':
+            return {
+                ...state,
+                likedLocations: [...action.likedLocations]
+            };
+
         case 'ADD_LOCATION':
             return {
                 ...state,
-                locations: [...state.locations, action.location]
+                likedLocations: [...state.likedLocations, action.location]
             };
 
         case 'UPDATE_LOCATION':
             return {
                 ...state,
-                locations: state.locations.map((location) => location._id === action.location._id ? action.location : location)
+                likedLocations: state.likedLocations.map((location) => location._id === action.location._id ? action.location : location)
             };
 
         case 'REMOVE_LOCATION':
             return {
                 ...state,
-                locations: state.locations.filter((location) => location._id !== action.itemId)
+                likedLocations: state.likedLocations.filter((location) => location._id !== action.itemId)
             };
 
+        case 'TOGGLE_METRIC':
+            return {
+                ...state,
+                isMetric: state.isMetric ? false : true
+            }
 
         case 'SET_FILTER_BY':
             return {

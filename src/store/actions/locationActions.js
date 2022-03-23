@@ -1,5 +1,5 @@
 import { locationService } from '../../services/locationService';
-import { accuWeatherAPI } from '../../services/externalAPIService';
+import { accuWeatherAPI } from '../../services/accuWeatherService';
 
 export function loadLocations() {
     return async (dispatch, getState) => {
@@ -17,23 +17,19 @@ export function loadSuggestions() {
     return async (dispatch) => {};
 }
 
-export function setLocation(locationId) {
+export function setLocation(locationEntry = accuWeatherAPI.getDefaultLocation()) {
     return async (dispatch) => {
-        if (!locationId) return;
-        console.log('locationId: ', locationId);
-        const location = await locationService.getById(locationId);
-        console.log('location: ', location);
+        if (!locationEntry || !locationEntry._id) return;
+        let location = await accuWeatherAPI.getById(locationEntry._id);
         if (!location) {
-            console.log('No Location Found.');
             try {
-                const newLocation = await accuWeatherAPI.getLocation(locationId);
-                console.log('newLocation: ', newLocation);
-                locationService.save(newLocation)
-                dispatch({type: 'SET_LOCATION', newLocation})
+                location = await accuWeatherAPI.getLocation(locationEntry);
+                accuWeatherAPI.save(location);
             } catch (err) {
                 console.log(err);
             }
         }
+        dispatch({ type: 'SET_LOCATION', location });
     };
 }
 
@@ -53,6 +49,12 @@ export function saveLocation(location) {
         } catch (err) {
             console.log(err);
         }
+    };
+}
+
+export function toggleMetric() {
+    return (dispatch) => {
+        dispatch({ type: 'TOGGLE_METRIC' });
     };
 }
 

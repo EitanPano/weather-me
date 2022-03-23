@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { SuggestPreview } from './SuggestPreview';
 
-export function SuggestList({ suggestions, onSelect }) {
-    if (!suggestions) return null;
+export function SuggestList({ suggestions, onSelect, isDisplayed }) {
+    if (!suggestions || isDisplayed === false) return null;
+
     return (
         <ul>
             {suggestions.map((suggestion) => (

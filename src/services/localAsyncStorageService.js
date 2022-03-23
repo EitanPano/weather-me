@@ -37,8 +37,8 @@ async function put(entityType, updatedEntity) {
         const idx = entities.findIndex(
             (entity) => entity._id === updatedEntity._id
         );
-        console.log('IDX From Lasso: ', idx);
-        entities.splice(idx, 1, updatedEntity);
+        if (idx === -1) entities.push(updatedEntity);
+        else entities.splice(idx, 1, updatedEntity);       
         _save(entityType, entities);
         return updatedEntity;
     });

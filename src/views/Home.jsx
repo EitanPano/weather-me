@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useParams } from 'react-router-dom';
 import { setLocation } from '../store/actions/locationActions';
-import { accuWeatherAPI } from '../services/externalAPIService';
+import { accuWeatherAPI } from '../services/accuWeatherService';
 
 import { LocationDetails } from './LocationDetails';
 
@@ -12,7 +12,6 @@ import { Loading } from '../cmps/Loading';
 
 export const Home = () => {
     const dispatch = useDispatch();
-    const { selectedLocation,  } = useSelector((state) => state.locationModule);
     const [suggestions, setSuggestions] = useState(null);
     
     useEffect(async () => {
@@ -25,12 +24,11 @@ export const Home = () => {
         setSuggestions(newSuggestions);
     }
 
-    function onSetLocation(locationId) {
+    function onSetLocation(locationEntry) {
         // dispatch(addLocation(location))
-        dispatch(setLocation(locationId))
+        dispatch(setLocation(locationEntry))
     }
 
-    if (!selectedLocation) return <Loading></Loading>;
     return (
         <div>
             <h1>Home-Page</h1>
@@ -40,7 +38,6 @@ export const Home = () => {
                 suggestions={suggestions}
             ></SearchBar>
             <LocationDetails></LocationDetails>
-            <h2>{JSON.stringify(selectedLocation)}</h2>
         </div>
     );
 };

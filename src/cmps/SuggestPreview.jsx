@@ -7,10 +7,9 @@ export function SuggestPreview({ suggestion, onSelect }) {
 
     if (!suggestion) return null;
 
-    const { _id, cityName } = suggestion
     return (
-        <li onClick={() => onSelect(_id)}>
-            <p>City: {cityName}</p>
+        <li onClick={() => onSelect(suggestion)}>
+            <p>City: {suggestion.cityName}</p>
         </li>
     );
 }
