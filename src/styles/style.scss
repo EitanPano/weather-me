@@ -14,8 +14,11 @@
 
 // COMPONENTS
 // @import "cmps/blur-screen";
+@import "cmps/buttons";
 @import "cmps/app-header";
 @import "cmps/burger-menu";
+@import "cmps/location-list";
+@import "cmps/location-preview";
 
 //Views
 @import "views/home";
@@ -23,8 +26,3 @@
 @import "views/favorites";
 
 
-// TESTS
-.app-logo {
-    width: 15em;
-    height: 15em;
-}

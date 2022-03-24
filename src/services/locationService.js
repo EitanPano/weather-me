@@ -47,7 +47,7 @@ async function query(filterBy = null) {
     return Promise.resolve([...locations]);
 }
 
-export async function getById(id) {
+async function getById(id) {
     const location = await lasso.get(LOCATION_KEY, id);
     return location ? { ...location } : null;
 }
@@ -66,14 +66,14 @@ async function _updateLocation(location) {
     return {...newLocation};
 }
 
-function remove(id) {
-    lasso.remove(LOCATION_KEY, id);
+async function remove(id) {
+    await lasso.remove(LOCATION_KEY, id);
 }
 
 function _loadLocations() {
-    let locations = JSON.parse(localStorage.getLocation(LOCATION_KEY));
+    let locations = JSON.parse(localStorage.getItem(LOCATION_KEY));
     if (!locations || !locations.length) locations = defaultLocations;
-    localStorage.setLocation(LOCATION_KEY, JSON.stringify(locations));
+    localStorage.setItem(LOCATION_KEY, JSON.stringify(locations));
     return locations;
 }
 

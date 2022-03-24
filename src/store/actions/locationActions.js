@@ -1,5 +1,6 @@
 import { locationService } from '../../services/locationService';
-import { accuWeatherAPI } from '../../services/accuWeatherService';
+import { accuWeatherService } from '../../services/accuWeatherService';
+// import { accuWeatherApi } from '../../services/accuWeatherApi';
 
 export function loadLocations() {
     return async (dispatch, getState) => {
@@ -17,14 +18,14 @@ export function loadSuggestions() {
     return async (dispatch) => {};
 }
 
-export function setLocation(locationEntry = accuWeatherAPI.getDefaultLocation()) {
+export function setLocation(locationEntry = accuWeatherService.getDefaultLocation()) {
     return async (dispatch) => {
         if (!locationEntry || !locationEntry._id) return;
-        let location = await accuWeatherAPI.getById(locationEntry._id);
+        let location = await accuWeatherService.getById(locationEntry._id);
         if (!location) {
             try {
-                location = await accuWeatherAPI.getLocation(locationEntry);
-                accuWeatherAPI.save(location);
+                location = await accuWeatherService.getLocation(locationEntry);
+                accuWeatherService.save(location);
             } catch (err) {
                 console.log(err);
             }
@@ -59,7 +60,7 @@ export function toggleMetric() {
 }
 
 export function removeLocation(locationId) {
-    return async (dispatch) => {
+    return (dispatch) => {
         try {
             locationService.remove(locationId);
             dispatch({ type: 'REMOVE_LOCATION', locationId });

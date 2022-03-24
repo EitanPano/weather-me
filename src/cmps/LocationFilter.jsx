@@ -1,6 +1,6 @@
 import { useForm } from '../hooks/useForm';
 
-export const ItemFilter = (props) => {
+export const LocationFilter = (props) => {
     const [filterBy, handleChange] = useForm(
         {
             term: '',

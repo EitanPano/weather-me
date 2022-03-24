@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
     defaultLocation: null,
     selectedLocation: null,
-    likedLocations: [],
+    locations: [],
     filterBy: null,
     isMetric: true,
 };
@@ -18,25 +18,25 @@ export const locationReducer = (state = INITIAL_STATE, action) => {
         case 'LOAD_LOCATIONS':
             return {
                 ...state,
-                likedLocations: [...action.likedLocations]
+                locations: [...action.locations]
             };
 
         case 'ADD_LOCATION':
             return {
                 ...state,
-                likedLocations: [...state.likedLocations, action.location]
+                locations: [...state.locations, action.location]
             };
 
         case 'UPDATE_LOCATION':
             return {
                 ...state,
-                likedLocations: state.likedLocations.map((location) => location._id === action.location._id ? action.location : location)
+                locations: state.locations.map((location) => location._id === action.location._id ? action.location : location)
             };
 
         case 'REMOVE_LOCATION':
             return {
                 ...state,
-                likedLocations: state.likedLocations.filter((location) => location._id !== action.itemId)
+                locations: state.locations.filter((location) => location._id !== action.locationId)
             };
 
         case 'TOGGLE_METRIC':

@@ -1,0 +1,10 @@
+.btn-close {
+    background-color: transparent;
+    font-size: 1.5em;
+    opacity: 0;
+    transition: all 0.2s;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}

@@ -19,7 +19,7 @@ async function query(entityType, pointerType = [], delay = 500) {
 
 async function get(entityType, entityId) {
     return query(entityType).then((entities) =>
-        entities.find((entity) => entity._id === entityId)
+        entities.find((entity) => entity._id === '' + entityId)
     );
 }
 
@@ -38,7 +38,7 @@ async function put(entityType, updatedEntity) {
             (entity) => entity._id === updatedEntity._id
         );
         if (idx === -1) entities.push(updatedEntity);
-        else entities.splice(idx, 1, updatedEntity);       
+        else entities.splice(idx, 1, updatedEntity);
         _save(entityType, entities);
         return updatedEntity;
     });
