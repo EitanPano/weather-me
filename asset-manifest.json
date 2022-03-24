@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/eitan-pano-21-03-2022/static/css/main.e7e445b4.css",
-    "main.js": "/eitan-pano-21-03-2022/static/js/main.6ae01126.js",
+    "main.js": "/eitan-pano-21-03-2022/static/js/main.2c92d20c.js",
     "static/js/787.d9312eb8.chunk.js": "/eitan-pano-21-03-2022/static/js/787.d9312eb8.chunk.js",
     "index.html": "/eitan-pano-21-03-2022/index.html",
     "main.e7e445b4.css.map": "/eitan-pano-21-03-2022/static/css/main.e7e445b4.css.map",
-    "main.6ae01126.js.map": "/eitan-pano-21-03-2022/static/js/main.6ae01126.js.map",
+    "main.2c92d20c.js.map": "/eitan-pano-21-03-2022/static/js/main.2c92d20c.js.map",
     "787.d9312eb8.chunk.js.map": "/eitan-pano-21-03-2022/static/js/787.d9312eb8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e7e445b4.css",
-    "static/js/main.6ae01126.js"
+    "static/js/main.2c92d20c.js"
   ]
 }
