@@ -12,11 +12,11 @@ export const accuWeatherService = {
 
 const ACCUWEATHER_API_KEY = '4h4quqPoRdrXHq8A2OpwasX8J3uDHAAp';
 
-const AUTO_COMPLETE_URL = `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${ACCUWEATHER_API_KEY}`;
+const AUTO_COMPLETE_URL = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${ACCUWEATHER_API_KEY}`;
 const CURRENT_WEATHER_URL =
-    'http://dataservice.accuweather.com/currentconditions/v1';
+    'https://dataservice.accuweather.com/currentconditions/v1';
 const DAILY_FORECAST_URL =
-    'http://dataservice.accuweather.com/forecasts/v1/daily/5day';
+    'https://dataservice.accuweather.com/forecasts/v1/daily/5day';
 
 const SUGGESTION_KEY = 'suggestions';
 const CACHED_LOCATION_KEY = 'cachedLocations';
