@@ -1,10 +1,24 @@
 .location-preview {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: $clr4;
+    border-radius: 0.5em ;
+    padding: 1.5em;
 
-    
-    
-    
+    .btn-delete {
+        position: absolute;
+        top: 0em;
+        right: 0.2em;
+    }
 
-
+    .icon-weather {
+        width: 3.5em;
+        height: 3.5em;
+        margin: 0.5em;
+    }
+    
     &:hover {
         .btn-delete {
             opacity: 1;

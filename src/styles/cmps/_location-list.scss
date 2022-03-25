@@ -1,0 +1,17 @@
+.location-list {
+    border-radius: 0.5em;
+    margin-top: 5vh;
+    padding: 1em;
+    background-color: $clr3;
+    grid-template-columns: repeat( auto-fill, minmax(10em, 1fr));
+}
+
+@media screen and (min-width: 575px) {
+    .location-list {
+        grid-template-columns: repeat( auto-fill, minmax(13em, 1fr));
+    }
+
+}
+
+@include for-narrow-layout {
+}

@@ -25,13 +25,19 @@ export function Favorites() {
     };
 
     return (
-        <div>
+        <div className='favorites'>
             <h1>Favorite Locations</h1>
-            <LocationList
-                onSetLocation={onSetLocation}
-                onRemove={onRemove}
-                locations={locations}
-            ></LocationList>
+            <div className='container'>
+                <section className='weather-quote'>
+                    <p className='quote'>"Wherever you go, no matter what the weather, always bring your own sunshine."</p>
+                    <p className='author'>Anthony J. D'Angelo</p>
+                </section>
+                <LocationList
+                    onSetLocation={onSetLocation}
+                    onRemove={onRemove}
+                    locations={locations}
+                ></LocationList>
+            </div>
         </div>
     );
 }

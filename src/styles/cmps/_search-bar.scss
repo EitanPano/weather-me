@@ -10,10 +10,10 @@
             padding: 0.6em 1.2em;
             border-radius: 1em;
             font-size: 1em;
-            border: 3px solid $clr3;
+            border: 3px solid $clr4;
             
             &:focus {
-                border: 3px solid $clr2;
+                border: 3px solid darken($clr5, 10%);
             }
         }
     }

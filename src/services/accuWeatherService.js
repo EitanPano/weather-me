@@ -103,7 +103,7 @@ async function _getDailyForecast(locationId) {
         // console.log('A request was made');
         const { Headline, DailyForecasts } = data;
         const dailyForecast = {
-            forcastText: Headline.Text,
+            forecastText: Headline.Text,
             forecastCategory: Headline.Category,
             dailyForecasts: DailyForecasts.reduce((acc, day) => {
                 const { Date, Temperature, Day, Night } = day;

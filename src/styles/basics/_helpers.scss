@@ -9,14 +9,25 @@
 
 // GRADIENTS
 
-
 // TRANSITIONS 
-
 
 //FLEX
 
+.hidden {
+    display: none
+}
 
+.bold {
+    font-weight: bold;
+    font-size: 1.1em;
+}
 
+.pointer {
+    cursor: pointer;
+}
 
+.error-msg {
+    font-size: 0.9em;
+}
 
 
