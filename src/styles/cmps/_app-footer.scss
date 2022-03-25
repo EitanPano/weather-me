@@ -1,0 +1,17 @@
+.app-footer {
+    font-size: 0.9em;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    color: $text;
+    background-color: $clr4;
+    box-shadow: 0 -2px 0 lighten($clr4, 25%);
+
+    span {
+        color: $clr1;
+        font-weight: bold;
+    }
+}

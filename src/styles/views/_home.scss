@@ -1,3 +1,9 @@
 .home {
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 90vh;
+    .search {
+        margin: 2em auto;
+    }
 }

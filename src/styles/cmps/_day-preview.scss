@@ -1,0 +1,31 @@
+.day-preview {
+    position: relative;
+    text-align: center;
+    background-color: $clr3;
+    border-radius: 1em;
+    padding: 0.5em;
+
+    h4 {
+        line-height: 2em;
+    }
+
+    .description {
+        display: flex;
+
+        > article {
+            width: 50%;
+        }
+    }
+}
+
+@include for-mobile-layout {
+    .day-preview {
+        h4 {
+            width: 100%;
+            position: absolute;
+            top: 2.8em;
+            left: 0;
+            right: 0;
+        }
+    }
+}

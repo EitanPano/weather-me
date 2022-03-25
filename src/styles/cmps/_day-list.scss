@@ -1,0 +1,40 @@
+.day-list {
+
+}
+
+
+@media screen and (min-width: 642px) {
+    .day-list {
+        > *:nth-child(5) {
+            transform: translateX(50%);
+        }
+    } 
+}
+
+@media screen and (min-width: 935px) {
+    .day-list {
+        > *:nth-child(4) {
+            transform: translateX(50%);
+        }
+    } 
+}
+
+@media screen and (min-width: 1227px) {
+    .day-list {
+        > *:nth-child(4) {
+            transform: translateX(0);
+        }
+        *:nth-child(5) {
+            transform: translateX(150%);
+        }
+    } 
+}
+
+@media screen and (min-width: 1343px) {
+    .day-list {
+        *:nth-child(5) {
+            transform: translateX(0);
+        }
+    } 
+}
+

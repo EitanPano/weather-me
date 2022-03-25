@@ -8,8 +8,8 @@ export function SuggestPreview({ suggestion, onSelect }) {
     if (!suggestion) return null;
 
     return (
-        <li onClick={() => onSelect(suggestion)}>
-            <p>City: {suggestion.cityName}</p>
+        <li className="suggest-preview" onClick={() => onSelect(suggestion)}>
+            <p>{suggestion.cityName}</p>
         </li>
     );
 }

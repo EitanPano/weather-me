@@ -11,7 +11,7 @@ export const LocationPreview = ({ location, onSetLocation, onRemove }) => {
     const { temperature } = location;
     return (
         <li onClick={() => onSetLocation(location)} className='location-preview'>
-            <button onClick={()=>onRemove(location._id)} className='btn-close'>✖</button>
+            <button onClick={()=>onRemove(location._id)} className='btn-delete'>✖</button>
             <header>
                 <h3>{location.cityName}</h3>
                 <p>{location.countryName}</p>

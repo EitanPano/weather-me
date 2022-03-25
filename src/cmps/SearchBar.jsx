@@ -7,14 +7,14 @@ import { SuggestList } from './SuggestList';
 export const SearchBar = (props) => {
     const [searchTerm, handleChange] = useForm({ term: '' });
     const debouncedSearchTerm = useDebounce(searchTerm, 750);
-    const [isResultsShown, setIsResultsShown] = useState(false);
+    const [isSuggestsShown, setIsSuggestsShown] = useState(false);
 
     useEffect(async () => {
         props.onChangeSearch(searchTerm);
     }, [debouncedSearchTerm]);
 
     useEffect(() => {
-        const handler = () => setIsResultsShown(false)
+        const handler = () => setIsSuggestsShown(false)
         document.body.addEventListener('click', handler)
         return () => {
             document.body.removeEventListener('click', handler)
@@ -22,18 +22,18 @@ export const SearchBar = (props) => {
     }, [])
 
     const onSelect = (locationEntry) => {
-        setIsResultsShown(false);
+        setIsSuggestsShown(false);
         props.onSetLocation(locationEntry);
     };
 
     const { term } = searchTerm;
     return (
-        <div onClick={(ev) => ev.stopPropagation()} className="search-bar">
-            <form autoComplete="off" onSubmit={(ev) => ev.preventDefault()}>
+        <div  className="search-bar">
+            <form autoComplete="off" onSubmit={(ev) => ev.preventDefault()} onClick={(ev) => ev.stopPropagation()}>
                 <label htmlFor="term"></label>
                 <input
                     value={term}
-                    onClick={() => setIsResultsShown(true)}
+                    onClick={() => setIsSuggestsShown(true)}
                     onChange={handleChange}
                     id="term"
                     name="term"
@@ -44,7 +44,7 @@ export const SearchBar = (props) => {
             <SuggestList
                 onSelect={onSelect}
                 suggestions={props.suggestions}
-                isDisplayed={isResultsShown}
+                isDisplayed={isSuggestsShown}
             ></SuggestList>
         </div>
     );

@@ -3,20 +3,25 @@
 @import "setup/mixins";
 @import "setup/functions";
 @import "setup/typography";
+@import "setup/sanitize";
 
 // BASICS
-@import "basics/sanitize";
 @import "basics/helpers";
 @import "basics/base";
 @import "basics/layout";
+@import "basics/buttons";
+@import "basics/icons";
 
 
 
 // COMPONENTS
 // @import "cmps/blur-screen";
-@import "cmps/buttons";
 @import "cmps/app-header";
+@import "cmps/app-footer";
 @import "cmps/burger-menu";
+@import "cmps/search-bar";
+@import "cmps/day-list";
+@import "cmps/day-preview";
 @import "cmps/location-list";
 @import "cmps/location-preview";
 
@@ -24,5 +29,4 @@
 @import "views/home";
 @import "views/location-details";
 @import "views/favorites";
-
 

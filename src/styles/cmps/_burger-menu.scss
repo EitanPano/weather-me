@@ -10,13 +10,6 @@
         flex-direction: column;
         border-radius: 0.3em;
 
-        ~ nav {
-            // width: 0;
-            // > a {
-            //     width: 0;
-            // }
-        }
-
         :nth-child(1) {
             top: 15%;
         }
@@ -26,7 +19,7 @@
 
         span {
             position: absolute;
-            background-color: $text;
+            background-color: $clr1;
             width: 70%;
             height: 13%;
             border-radius: 2.5em;
@@ -39,7 +32,6 @@
             :nth-child(1) {
                 transform: rotate(135deg);
                 top: 43%;
-                // left: 20%;
             }
             :nth-child(2) {
                 opacity: 0;
@@ -67,7 +59,4 @@
 @include for-narrow-layout {
 }
 @include for-normal-layout {
-    // #burger-toggle + label {
-    //     display: none;
-    // }
 }

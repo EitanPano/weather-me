@@ -1,18 +1,15 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import { useParams } from 'react-router-dom';
-import { setLocation } from '../store/actions/locationActions';
+import { useDispatch } from 'react-redux';
+
 import { accuWeatherService } from '../services/accuWeatherService';
+import { setLocation } from '../store/actions/locationActions';
 
 import { LocationDetails } from './LocationDetails';
-
 import { SearchBar } from '../cmps/SearchBar';
-
 
 export const Home = () => {
     const dispatch = useDispatch();
     const [suggestions, setSuggestions] = useState(null);
-    
 
     async function onChangeSearch(term) {
         const newSuggestions = await accuWeatherService.getSuggestions(term);
@@ -20,17 +17,18 @@ export const Home = () => {
     }
 
     function onSetLocation(locationEntry) {
-        dispatch(setLocation(locationEntry))
+        dispatch(setLocation(locationEntry));
     }
 
     return (
-        <div>
-            <h1>Home-Page</h1>
-            <SearchBar
-                onSetLocation={onSetLocation}
-                onChangeSearch={onChangeSearch}
-                suggestions={suggestions}
-            ></SearchBar>
+        <div className="home">
+            <section className="search">
+                <SearchBar
+                    onSetLocation={onSetLocation}
+                    onChangeSearch={onChangeSearch}
+                    suggestions={suggestions}
+                ></SearchBar>
+            </section>
             <LocationDetails></LocationDetails>
         </div>
     );

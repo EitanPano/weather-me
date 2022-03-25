@@ -1,0 +1,45 @@
+.btn {
+    cursor: pointer;
+    padding: 0.4em 0.6em;
+    font-weight: bold;
+    color: $text;
+    background-color: $clr5;
+    box-shadow: inset 2px 3px 8px rgba(255, 255, 255, 0.6);
+    border: none;
+    outline: 3px solid lighten($clr5, 20%);
+    border-radius: 0.25em;
+}
+
+.btn-star {
+    cursor: pointer;
+    font-size: 2.5em;
+    text-shadow: 0.5px 0 10px white;
+    transition: all 0.2s;
+    &.on {
+        color: gold;
+        &:hover {
+            color: #8f8f8f;
+        }
+    }
+    &.off {
+        color: #8f8f8f;
+        &:hover {
+            color: gold;
+        }
+    }
+}
+
+.btn-delete {
+    font-size: 1.5em;
+    background-color: transparent;
+}
+
+@include for-normal-layout {
+    .btn-delete {
+        opacity: 0;
+        transition: all 0.2s;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}

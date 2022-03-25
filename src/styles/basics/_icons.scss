@@ -1,0 +1,21 @@
+.icon {
+    min-width: em(43px);
+    min-height: em(43px);
+}
+
+.icon-weather {
+    padding: 0.3em 0.3em 0.1em;
+    border-radius: 50%;
+    box-shadow: 0 0 5px white;
+    object-fit: cover;
+    
+    &.medium {
+        width: 5em;
+        height: 5em;
+    }
+    
+    &.small {
+        width: 3em;
+        height: 3em;
+    }
+}

@@ -9,51 +9,51 @@ import { weatherIcons } from '../services/accuWeatherService';
 export const LocationDetails = () => {
     const { selectedLocation, isMetric } = useSelector((state) => state.locationModule);
     const dispatch = useDispatch();
-    const [isFavorite, setIsFavorite ] = useState(false)
-    
+    const [isFavorite, setIsFavorite] = useState(false);
+
     useEffect(async () => {
-        // const { selectedLocation } = useSelector((state) => state.locationModule);
-        if (!selectedLocation) return
-        const location = await dispatch(getLocationById(selectedLocation._id))
-        setIsFavorite(location ? true : false)
-    }, [selectedLocation])
+        if (!selectedLocation) return;
+        const location = await dispatch(getLocationById(selectedLocation._id));
+        setIsFavorite(location ? true : false);
+    }, [selectedLocation]);
 
     const toggleIsFavorite = async () => {
-        await dispatch(getLocationById(selectedLocation._id))
-        setIsFavorite(isFavorite ? false : true)
-        return (isFavorite)
-        ? onRemoveLocation(selectedLocation._id)
-        : onAddLocation(selectedLocation)
-    }
-     
+        await dispatch(getLocationById(selectedLocation._id));
+        setIsFavorite(isFavorite ? false : true);
+        return isFavorite ? onRemoveLocation(selectedLocation._id) : onAddLocation(selectedLocation);
+    };
+
     if (!selectedLocation) return <Loading></Loading>;
 
     const getTemperature = () => {
         const { temperature } = selectedLocation;
-        return isMetric ? temperature.celsius : temperature.fahrenheit;
+        return isMetric
+            ? temperature.celsius + '°c'
+            : temperature.fahrenheit + '°f';
     };
 
     const onAddLocation = () => {
         dispatch(saveLocation(selectedLocation));
-        console.log('Location Added to Favorites');
     };
 
     const onRemoveLocation = () => {
         dispatch(removeLocation(selectedLocation._id));
-        console.log('Location Removed from Favorites');
     };
 
-    const { cityName, countryID, dailyForecasts, currentWeatherText, weatherIcon } = selectedLocation;
+    const { cityName, countryID, dailyForecasts, currentWeatherText, weatherIcon, } = selectedLocation;
     return (
         <section className="location-details">
             <header>
-                <div>
-                    <img className="weather-icon" src={weatherIcons[weatherIcon]} alt="" />
-                    <h3>{countryID} - {cityName} <span>{getTemperature()}°</span></h3>
+                <div className='current-weather'>
+                    <img className="icon-weather medium" src={weatherIcons[weatherIcon]} alt="weather-icon" />
+                    <h3>
+                        <span>{countryID} - {cityName}</span>
+                        <span>{getTemperature()}</span>
+                    </h3>
                 </div>
-                <div>
-                    <label className={isFavorite ? 'icon-liked' : 'icon-unliked'} htmlFor="location-like" ></label>
-                    <input onClick={toggleIsFavorite} name="location-like" id="location-like" value={ isFavorite ? 'Remove from Favorites' : 'Add to Favorites'} type="button" />
+                <div className='actions'>
+                    <label className={isFavorite ? 'btn-star on' : 'btn-star off'} htmlFor="location-like">★</label>
+                    <input className='btn' hidden={isFavorite} onClick={toggleIsFavorite} name="location-like" id="location-like" value={ isFavorite ? 'Remove from Favorites' : 'Add to Favorites' } type="button" />
                 </div>
             </header>
 

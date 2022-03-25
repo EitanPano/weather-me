@@ -5,7 +5,7 @@ export function SuggestList({ suggestions, onSelect, isDisplayed }) {
     if (!suggestions || isDisplayed === false) return null;
 
     return (
-        <ul>
+        <ul className='suggest-list'>
             {suggestions.map((suggestion) => (
                 <SuggestPreview
                     onSelect={onSelect}

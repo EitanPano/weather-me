@@ -1,0 +1,44 @@
+.search-bar {
+    letter-spacing: 0.5px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    > form {
+        input {
+            outline: none;
+            padding: 0.6em 1.2em;
+            border-radius: 1em;
+            font-size: 1em;
+            border: 3px solid $clr3;
+            
+            &:focus {
+                border: 3px solid $clr2;
+            }
+        }
+    }
+
+    > ul {
+        z-index: 10;
+        transition: all 0.3s;
+        position: absolute;
+        top: 2.7em;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+        
+        li {
+            background-color: $clr4;
+            color: $text;
+            p {
+                min-width: 13.5em;
+                padding: 0.25em 0.5em;
+            }      
+            &:hover {
+                background-color: lighten($clr5, 5%);
+                color: $clr1;
+            }
+            &:not(:last-child) {
+                border-bottom: 1px solid darken($text, 20%);
+            }
+        }
+    }
+}
