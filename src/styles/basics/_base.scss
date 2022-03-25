@@ -8,9 +8,11 @@ body {
 }
 
 body {
+    width: 100%;
     position: relative;
     background-image: url('../../assets/cloudy-bg.jpg');
     background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
