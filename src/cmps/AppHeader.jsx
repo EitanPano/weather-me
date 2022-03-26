@@ -22,7 +22,7 @@ export function AppHeader() {
             <h1 className='app-logo'><NavLink to="/">WeatherMe</NavLink></h1>
             <div className='modes'>
                 <input className="tgl tgl-skewed" id="cb3" type="checkbox"/>
-                <label onClick={() => dispatch(toggleMetric())} htmlFor='cb3' className="tgl-btn" data-tg-off="M" data-tg-on="F" />
+                <label onClick={() => dispatch(toggleMetric())} htmlFor='cb3' className="tgl-btn" data-tg-off="°C" data-tg-on="°F" />
             </div>
             <BurgerMenu isMenuOpen={isMenuOpen} onToggle={onToggle}></BurgerMenu>
             <nav onClick={() => setIsMenuOpen(false)}>

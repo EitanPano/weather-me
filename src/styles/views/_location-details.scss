@@ -29,7 +29,7 @@
     h2 {
         text-align: center;
         font-size: 1.5em;
-        margin: 3em auto;
+        margin: 1.5em auto;
     }
 
     .actions {
@@ -45,5 +45,12 @@
     }
 }
 
+@include for-wide-layout {
+    .location-details {
+        h2 {
+            margin: 2em auto 2.5em;
+        }
+    }
+}
 
 

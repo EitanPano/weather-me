@@ -26,7 +26,7 @@ export function Favorites() {
 
     return (
         <div className='favorites'>
-            <h1>Favorite Locations</h1>
+            <h1 className='slogen'>Favorite Locations</h1>
             <div className='container'>
                 <section className='weather-quote'>
                     <p className='quote'>"Wherever you go, no matter what the weather, always bring your own sunshine."</p>

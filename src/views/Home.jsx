@@ -22,6 +22,7 @@ export const Home = () => {
 
     return (
         <div className="home">
+            <h1 className='slogen'>Know the Weather</h1>
             <section className="search">
                 <SearchBar
                     onSetLocation={onSetLocation}

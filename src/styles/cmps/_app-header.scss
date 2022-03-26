@@ -59,6 +59,9 @@
 }
 
 @include for-mobile-layout {
+    .app-header {
+        padding: 0 0.5em;
+    }
 }
 @include for-narrow-layout {
 }
