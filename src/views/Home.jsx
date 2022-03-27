@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { accuWeatherService } from '../services/accuWeatherService';
+import { suggestionService } from '../services/suggestionService';
 import { setLocation } from '../store/actions/locationActions';
 
 import { LocationDetails } from './LocationDetails';
@@ -12,7 +12,7 @@ export const Home = () => {
     const [suggestions, setSuggestions] = useState(null);
 
     async function onChangeSearch(term) {
-        const newSuggestions = await accuWeatherService.getSuggestions(term);
+        const newSuggestions = await suggestionService.getSuggestionMap(term);
         setSuggestions(newSuggestions);
     }
 

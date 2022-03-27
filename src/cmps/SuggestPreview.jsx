@@ -1,9 +1,23 @@
-// import { useNavigate } from 'react-router-dom';
 
-export function SuggestPreview({ suggestion, onSelect }) {
-    // const navigate = useNavigate();
+import { useEffect } from "react";
 
-    // const onDetails = (suggestId) => navigate(`/location/${suggestId}`);
+export function SuggestPreview({ suggestion, onSelect, isFirst }) {
+
+    const handleFirstCmp = (ev) => {
+        if (!isFirst) return;
+        if (ev.key === 'Enter') return onSelect(suggestion);
+    }
+
+    useEffect(() => {
+        if (!isFirst) return;
+        document.addEventListener('keyup', handleFirstCmp)
+        
+        return () => {
+            document.removeEventListener('keyup', handleFirstCmp)
+          }
+    }, [])
+
+
 
     if (!suggestion) return null;
 

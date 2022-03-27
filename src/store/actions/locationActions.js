@@ -14,10 +14,6 @@ export function loadLocations() {
     };
 }
 
-export function loadSuggestions() {
-    return async (dispatch) => {};
-}
-
 export function setLocation(locationEntry = accuWeatherService.getDefaultLocation()) {
     return async (dispatch) => {
         if (!locationEntry || !locationEntry._id) return;
@@ -58,6 +54,8 @@ export function toggleMetric() {
         dispatch({ type: 'TOGGLE_METRIC' });
     };
 }
+
+
 
 export function removeLocation(locationId) {
     return (dispatch) => {

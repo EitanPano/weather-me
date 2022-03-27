@@ -76,5 +76,3 @@ function _loadLocations() {
     localStorage.setItem(LOCATION_KEY, JSON.stringify(locations));
     return locations;
 }
-
-

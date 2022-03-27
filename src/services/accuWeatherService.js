@@ -5,12 +5,13 @@ import { toFahrenheit } from './utilService';
 export const accuWeatherService = {
     save,
     getById,
-    getSuggestions,
+    getAutoComplete,
     getLocation,
     getDefaultLocation,
 };
 
 const ACCUWEATHER_API_KEY = '4h4quqPoRdrXHq8A2OpwasX8J3uDHAAp';
+// const ACCUWEATHER_API_KEY = 'cd6qSJZCu2mAyNm7MXY28kzavawio8xm';
 
 const AUTO_COMPLETE_URL = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${ACCUWEATHER_API_KEY}`;
 const CURRENT_WEATHER_URL = 'https://dataservice.accuweather.com/currentconditions/v1';
@@ -26,20 +27,6 @@ async function getById(id) {
 
 function save(location) {
     return location._id ? _updateLocation(location) : _addLocation(location);
-}
-
-async function getSuggestions(searchTerm) {
-    const { term } = searchTerm;
-    if (term.length <= 2) return;
-
-    const suggestions = await lasso.query(SUGGESTION_KEY, {});
-    const prefixes = Object.keys(suggestions);
-
-    if (!prefixes || !prefixes.length) return getAutoComplete(term);
-    const isPrefixExist = prefixes.some((prefix) => prefix === term);
-    if (!isPrefixExist) return getAutoComplete(term);
-
-    return suggestions[term];
 }
 
 async function getAutoComplete(term) {
@@ -59,7 +46,6 @@ async function getAutoComplete(term) {
             return acc;
         }, []);
 
-        await lasso.postMany(SUGGESTION_KEY, { [term]: newSuggestions }, {});
         return newSuggestions;
     } catch (err) {
         console.log('error:', err);

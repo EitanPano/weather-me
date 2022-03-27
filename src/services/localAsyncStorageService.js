@@ -9,7 +9,7 @@ export const lasso = {
 };
 
 async function query(entityType, pointerType = [], delay = 500) {
-    var entities = JSON.parse(localStorage.getItem(entityType)) || pointerType;
+    const entities = JSON.parse(localStorage.getItem(entityType)) || pointerType;
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(entities);
@@ -71,10 +71,10 @@ function _save(entityType, entities) {
 }
 
 function _makeId(length = 5) {
-    var text = '';
-    var possible =
+    const text = '';
+    const possible =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;

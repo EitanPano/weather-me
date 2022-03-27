@@ -24,8 +24,23 @@
         position: absolute;
         top: 2.7em;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-        
+
+        &:hover {
+            li {
+                &:first-child {
+                    background-color: $clr4;
+                }
+            }
+        }
+
         li {
+            &:first-child {
+                background-color: lighten($clr5, 5%);
+                :hover {
+                    background-color: lighten($clr5, 5%);
+                }
+            }
+
             background-color: $clr4;
             color: $text;
             p {
