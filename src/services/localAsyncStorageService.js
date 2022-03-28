@@ -55,7 +55,6 @@ async function remove(entityType, entityId) {
 
 async function postMany(entityType, newEntities, varType = []) {
     return query(entityType, varType).then((entities) => {
-        console.log(entities);
         if (Array.isArray(entities)) {
             entities.push(...newEntities);
         } else {
