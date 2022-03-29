@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/eitan-pano-21-03-2022/static/css/main.0cc4e538.css",
-    "main.js": "/eitan-pano-21-03-2022/static/js/main.adc5dc98.js",
+    "main.css": "/eitan-pano-21-03-2022/static/css/main.9d261e96.css",
+    "main.js": "/eitan-pano-21-03-2022/static/js/main.b938eff0.js",
     "static/js/787.d9312eb8.chunk.js": "/eitan-pano-21-03-2022/static/js/787.d9312eb8.chunk.js",
     "static/media/cloudy-bg.jpg": "/eitan-pano-21-03-2022/static/media/cloudy-bg.9ba54e3b92efd281d203.jpg",
     "index.html": "/eitan-pano-21-03-2022/index.html",
-    "main.0cc4e538.css.map": "/eitan-pano-21-03-2022/static/css/main.0cc4e538.css.map",
-    "main.adc5dc98.js.map": "/eitan-pano-21-03-2022/static/js/main.adc5dc98.js.map",
+    "main.9d261e96.css.map": "/eitan-pano-21-03-2022/static/css/main.9d261e96.css.map",
+    "main.b938eff0.js.map": "/eitan-pano-21-03-2022/static/js/main.b938eff0.js.map",
     "787.d9312eb8.chunk.js.map": "/eitan-pano-21-03-2022/static/js/787.d9312eb8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0cc4e538.css",
-    "static/js/main.adc5dc98.js"
+    "static/css/main.9d261e96.css",
+    "static/js/main.b938eff0.js"
   ]
 }
