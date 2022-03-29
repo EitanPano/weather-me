@@ -4,12 +4,13 @@
     background-color: $clr3;
     border-radius: 1em;
     padding: 0.5em;
-
+    
     h4 {
         line-height: 2em;
     }
-
+    
     .description {
+        font-size: 0.93em;
         display: flex;
 
         > article {

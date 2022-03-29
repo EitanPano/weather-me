@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 };
 
 export const locationReducer = (state = INITIAL_STATE, action) => {
-    // console.log('action', action);
     switch (action.type) {
         case 'SET_LOCATION':
             return {

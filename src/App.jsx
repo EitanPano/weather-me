@@ -7,6 +7,7 @@ import { setLocation } from './store/actions/locationActions';
 import { Home } from './views/Home';
 import { Favorites } from './views/Favorites'
 import { AppHeader } from './cmps/AppHeader';
+import { UserMessage } from './cmps/UserMessage';
 import { AppFooter } from './cmps/AppFooter';
 
 
@@ -21,11 +22,12 @@ export function App() {
         <Router>
             <div className="App">
 				<AppHeader></AppHeader>
-                <Routes>
-                    <Route element={<Favorites />} path="/favorite"></Route>
-                    <Route element={<Home />} path="/"></Route>
-					<Route path="*" element={<Navigate to="/" />}/>
-                </Routes>
+                <UserMessage></UserMessage>
+                    <Routes>
+                        <Route element={<Favorites />} path="/favorite"></Route>
+                        <Route element={<Home />} path="/"></Route>
+				    	<Route path="*" element={<Navigate to="/" />}/>
+                    </Routes>
                 <AppFooter></AppFooter>
             </div>
         </Router>

@@ -6,6 +6,7 @@ export const accuWeatherService = {
     save,
     getById,
     getAutoComplete,
+    getLocationEntry,
     getLocation,
     getDefaultLocation,
 };
@@ -14,6 +15,7 @@ const ACCUWEATHER_API_KEY = '4h4quqPoRdrXHq8A2OpwasX8J3uDHAAp';
 // const ACCUWEATHER_API_KEY = 'cd6qSJZCu2mAyNm7MXY28kzavawio8xm';
 
 const AUTO_COMPLETE_URL = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${ACCUWEATHER_API_KEY}`;
+const GEO_POSITION_URL = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_API_KEY}`
 const CURRENT_WEATHER_URL = 'https://dataservice.accuweather.com/currentconditions/v1';
 const DAILY_FORECAST_URL = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day';
 
@@ -51,6 +53,86 @@ async function getAutoComplete(term) {
         console.log('error:', err);
     }
 }
+const data = {
+    "Version": 1,
+    "Key": "213132",
+    "Type": "City",
+    "Rank": 75,
+    "LocalizedName": "Dor",
+    "EnglishName": "Dor",
+    "PrimaryPostalCode": "",
+    "Region": {
+        "ID": "MEA",
+        "LocalizedName": "Middle East",
+        "EnglishName": "Middle East"
+    },
+    "Country": {
+        "ID": "IL",
+        "LocalizedName": "Israel",
+        "EnglishName": "Israel"
+    },
+    "AdministrativeArea": {
+        "ID": "HA",
+        "LocalizedName": "Haifa",
+        "EnglishName": "Haifa",
+        "Level": 1,
+        "LocalizedType": "District",
+        "EnglishType": "District",
+        "CountryID": "IL"
+    },
+    "TimeZone": {
+        "Code": "IDT",
+        "Name": "Asia/Jerusalem",
+        "GmtOffset": 3,
+        "IsDaylightSaving": true,
+        "NextOffsetChange": "2022-10-29T23:00:00Z"
+    },
+    "GeoPosition": {
+        "Latitude": 32.609,
+        "Longitude": 34.926,
+        "Elevation": {
+            "Metric": {
+                "Value": 34,
+                "Unit": "m",
+                "UnitType": 5
+            },
+            "Imperial": {
+                "Value": 111,
+                "Unit": "ft",
+                "UnitType": 0
+            }
+        }
+    },
+    "IsAlias": false,
+    "SupplementalAdminAreas": [],
+    "DataSets": [
+        "AirQualityCurrentConditions",
+        "AirQualityForecasts",
+        "Alerts",
+        "DailyPollenForecast",
+        "ForecastConfidence",
+        "FutureRadar",
+        "MinuteCast"
+    ]
+}
+
+async function getLocationEntry({lat, long}) {
+    const reqUrl = `${GEO_POSITION_URL}&q=${lat},${long}&toplevel=true`
+    try {
+        // const { data } = await axios.get(reqUrl)
+        const { Key, LocalizedName, Country, Rank } = data;
+        const newEntry = {
+            _id: Key,
+            cityName: LocalizedName,
+            countryName: Country.LocalizedName,
+            countryID: Country.ID,
+            rank: Rank,
+        };
+        return newEntry
+    } catch(err) {
+        console.log('error:', err);
+    }
+}
 
 async function getLocation(locationEntry) {
     const currCondition = await _getCurrConditions(locationEntry._id);
@@ -64,8 +146,6 @@ async function _getCurrConditions(locationId) {
     try {
         const response = await axios.get(reqUrl);
         const data = response.data[0];
-        // console.log('A request was made');
-
         const currConditions = {
             localeTime: data.LocalObservationDateTime,
             temperature: {
@@ -86,7 +166,6 @@ async function _getDailyForecast(locationId) {
     const reqUrl = `${DAILY_FORECAST_URL}/${locationId}?apikey=${ACCUWEATHER_API_KEY}&metric=true`;
     try {
         const { data } = await axios.get(reqUrl);
-        // console.log('A request was made');
         const { Headline, DailyForecasts } = data;
         const dailyForecast = {
             forecastText: Headline.Text,

@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { Loading } from '../cmps/Loading';
 import { DayList } from '../cmps/DayList';
 import { getLocationById, removeLocation, saveLocation } from '../store/actions/locationActions';
 import { weatherIcons } from '../services/accuWeatherService';
+import { setUserMessage } from '../store/actions/userActions';
+import { eventBusService } from '../services/eventBusService';
 
 export const LocationDetails = () => {
-    const { selectedLocation, isMetric } = useSelector((state) => state.locationModule);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { selectedLocation, isMetric } = useSelector((state) => state.locationModule);
     const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(async () => {
@@ -34,10 +38,17 @@ export const LocationDetails = () => {
 
     const onAddLocation = () => {
         dispatch(saveLocation(selectedLocation));
+        const text = `${selectedLocation.cityName} added to Favorites, View it`
+        eventBusService.emit('showMsg', {
+            text,
+            cbFunc:()=>navigate('/favorite')
+        })
     };
-
+    
     const onRemoveLocation = () => {
         dispatch(removeLocation(selectedLocation._id));
+        const text = `${selectedLocation.cityName} is removed from Favorites`
+        eventBusService.emit('showMsg', {text})
     };
 
     const { cityName, countryID, dailyForecasts, currentWeatherText, weatherIcon, } = selectedLocation;

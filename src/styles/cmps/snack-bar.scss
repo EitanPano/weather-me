@@ -1,0 +1,42 @@
+.snack-bar {
+    position: fixed;
+    bottom: 1em;
+    // right: 0;
+    left: 1em;
+    z-index: 15;
+    padding: 0.5em 1em;
+    font-size: 0.95em;
+    color: $text;
+    border-radius: 0.5em;
+    background-color: #3f3f3f;
+    // transform: translateX(75%);
+    
+    opacity: 0;
+    animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% { 
+        opacity: 0;
+    }
+}
+
+.success {
+    background-color: green;
+}
+
+.error {
+    background-color: red;
+}
+
+.enter {
+}

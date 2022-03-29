@@ -1,6 +1,5 @@
 import { locationService } from '../../services/locationService';
 import { accuWeatherService } from '../../services/accuWeatherService';
-// import { accuWeatherApi } from '../../services/accuWeatherApi';
 
 export function loadLocations() {
     return async (dispatch, getState) => {
@@ -16,7 +15,13 @@ export function loadLocations() {
 
 export function setLocation(locationEntry = accuWeatherService.getDefaultLocation()) {
     return async (dispatch) => {
-        if (!locationEntry || !locationEntry._id) return;
+        
+        if (!locationEntry || !locationEntry._id) {
+            locationEntry = await accuWeatherService.getLocationEntry(locationEntry)
+            console.log(locationEntry);
+            if (!locationEntry || !locationEntry._id) return;
+        }
+            
         let location = await accuWeatherService.getById(locationEntry._id);
         if (!location) {
             try {
@@ -54,8 +59,6 @@ export function toggleMetric() {
         dispatch({ type: 'TOGGLE_METRIC' });
     };
 }
-
-
 
 export function removeLocation(locationId) {
     return (dispatch) => {
