@@ -1,30 +1,27 @@
-import { useEffect, useState } from 'react';
-import { eventBusService } from '../services/eventBusService';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const UserMessage = () => {
-    const [userMessage, setUserMessage] = useState(null);
+    const dispatch = useDispatch();
+    const { userMessage } = useSelector((state) => state.userModule);
+
     let timeoutId;
 
-    const showMessage = () => {
-        timeoutId = setTimeout(() => {
-            setUserMessage(null);
-        }, 3000);
-    };
-
     useEffect(() => {
-        eventBusService.on('showMsg', (ev) => {
+        if (!userMessage || !userMessage.text) return;
+        if (timeoutId) {
             clearTimeout(timeoutId);
-            const { type, text, cbFunc } = ev;
-            setUserMessage({ type, text, cbFunc });
-            showMessage();
-        });
-        return () => {
-            clearTimeout(timeoutId);
-            setUserMessage(null);
-        };
-    }, []);
+            dispatch({ type: 'SET_USER_MESSAGE' });
+        }
+        console.log(userMessage);
+        timeoutId = setTimeout(() => {
+            dispatch({ type: 'SET_USER_MESSAGE' });
+        }, 3000);
 
-    if (!userMessage) return null;
+        return () => clearTimeout(timeoutId);
+    }, [userMessage]);
+
+    if (!userMessage || !userMessage.text) return null;
 
     const { type, text, cbFunc } = userMessage;
 
@@ -32,19 +29,33 @@ export const UserMessage = () => {
         if (cbFunc && type) {
             return (
                 <p className={`snack-bar ${type}`}>
-                    {text} - <span className='bold' onClick={cbFunc}>Here</span>
+                    {text} -{' '}
+                    <span className="bold" onClick={cbFunc}>
+                        Here
+                    </span>
                 </p>
             );
         } else if (cbFunc) {
             return (
                 <p className={`snack-bar ${type}`}>
-                    {text} - <span className='cursor bold' onClick={cbFunc}>Here</span>
+                    {text} -{' '}
+                    <span className="cursor bold" onClick={cbFunc}>
+                        Here
+                    </span>
                 </p>
             );
         } else if (type) {
-            return <p className={`snack-bar ${type}`}>{text}</p>;
+            return (
+                <p className={`snack-bar ${type}`}>
+                    {text}
+                </p>
+            );
         }
-        return <p className={'snack-bar'}>{text}</p>;
+        return (
+            <p className={'snack-bar'}>
+                {text}
+            </p>
+        );
     };
 
     return switchMessage();

@@ -22,7 +22,7 @@ export const LocationDetails = () => {
     }, [selectedLocation]);
 
     const toggleIsFavorite = async () => {
-        await dispatch(getLocationById(selectedLocation._id));
+        // await dispatch(getLocationById(selectedLocation._id));
         setIsFavorite(isFavorite ? false : true);
         return isFavorite ? onRemoveLocation(selectedLocation._id) : onAddLocation(selectedLocation);
     };
@@ -39,16 +39,18 @@ export const LocationDetails = () => {
     const onAddLocation = () => {
         dispatch(saveLocation(selectedLocation));
         const text = `${selectedLocation.cityName} added to Favorites, View it`
-        eventBusService.emit('showMsg', {
-            text,
-            cbFunc:()=>navigate('/favorite')
-        })
+        dispatch(setUserMessage({text, cbFunc: ()=> navigate('/favorite')}))
+        // eventBusService.emit('showMsg', {
+        //     text,
+        //     cbFunc:()=>navigate('/favorite')
+        // })
     };
     
     const onRemoveLocation = () => {
         dispatch(removeLocation(selectedLocation._id));
         const text = `${selectedLocation.cityName} is removed from Favorites`
-        eventBusService.emit('showMsg', {text})
+        dispatch(setUserMessage({text}))
+        // eventBusService.emit('showMsg', {text})
     };
 
     const { cityName, countryID, dailyForecasts, currentWeatherText, weatherIcon, } = selectedLocation;

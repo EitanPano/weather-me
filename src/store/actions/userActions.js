@@ -14,6 +14,8 @@ export function loadUsers() {
 
 export function setUserMessage(userMessage) {
     return async (dispatch) => {
+        if (!userMessage.text) dispatch({type: 'SET_USER_MESSAGE', userMessage: null})
+        userMessage.isShown = true;
         dispatch({ type: 'SET_USER_MESSAGE', userMessage });
     };
 }

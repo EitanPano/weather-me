@@ -9,10 +9,8 @@
     color: $text;
     border-radius: 0.5em;
     background-color: #3f3f3f;
-    // transform: translateX(75%);
     
-    opacity: 0;
-    animation: fadeIn 3s;
+    animation: fadeIn 3.1s;
 }
 
 @keyframes fadeIn {
